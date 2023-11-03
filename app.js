@@ -3,7 +3,13 @@ const startGameBtn = document.getElementById('start-game-btn');
 let gameIsRunning = false;
 
 function getPlayerChoice() {
-  let selection = prompt('Rock, paper or scissors?', '').toLowerCase();
+  let selection;
+  try {
+    selection = prompt('Rock, paper or scissors?', '').toLowerCase();
+  } catch (error) {
+    gameIsRunning = false;
+    throw new Error('Something went wrong!');
+  }
   if (selection !== 'rock' && selection !== 'paper' && selection !== 'scissors') {
     alert('Invalid choice! Pick again!');
     return;
