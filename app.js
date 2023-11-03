@@ -11,6 +11,31 @@ function getPlayerChoice() {
   return selection;
 }
 
+function getPcChoice() {
+  const randomValue = Math.random();
+  if (randomValue < 0.34) {
+    return 'rock';
+  } else if (randomValue < 0.67) {
+    return 'paper';
+  } else {
+    return 'scissors';
+  }
+}
+
+function checkWinner(PcChoice, playerChoice) {
+  if (PcChoice === playerChoice) {
+    return 'draw';
+  } else if (
+    (PcChoice === 'rock' && playerChoice === 'paper') ||
+    (PcChoice === 'paper' && playerChoice === 'scissors') ||
+    (PcChoice === 'scissors' && playerChoice === 'rock')
+  ) {
+    return 'player';
+  } else {
+    return 'pc';
+  }
+}
+
 function startGame() {
   if (gameIsRunning) {
     return;
@@ -18,7 +43,9 @@ function startGame() {
   gameIsRunning = true;
   console.log('Game is starting...');
   const playerSelection = getPlayerChoice();
-  console.log(playerSelection);
+  const pcSelection = getPcChoice();
+  const winner = checkWinner(pcSelection, playerSelection);
+  console.log('Winner is: ', winner);
 }
 
 startGameBtn.addEventListener('click', startGame);
